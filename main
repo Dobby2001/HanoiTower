@@ -15,40 +15,66 @@
   <meta name="author" content="Luca Zepponi">
   <!-- Favicon: -->
   <link rel="icon" type="image/x-icon" href="logo.png">
-  <!--CSS
-  <link href="style.css" rel="stylesheet" type="text/css">-->
+  <!-- CSS -->
+  <link href="style.css" rel="stylesheet" type="text/css">
   <title>Hanoi's Towers</title>
 </head>
 <body>
   <header>
-    <h1 style="color: red;">Towers of Hanoi</h1>
+    <h1>Towers of Hanoi</h1>
   </header>
   <div>
     <p>
       Enter the number of disks: <input type="number" id="HanoiNumber" min="1" max="10" value="1">
     </p>
   </div>
+
+  <div class="blockDisk">
+    <div id="Disk"></div>
+  </div>
+
   <div>
     <button type="button" onclick="hanoi()">Solution</button>
     <p id="Solution">The solution is:</p>
   </div>
   
   <script>
-    // Number of disk
+    // To get number of disk
     function hanoi() {
       let n = document.getElementById("HanoiNumber").value;
       towerOfHanoi(n, 'A', 'C', 'B');
+      printDisk(n);
+      return n;
     }
 
     let move = 1;
-
+    // To print the exact move
     function printMove(n, fromRod, toRod) {
       var p = document.createElement('p');
-      p.innerHTML = "- Move " + move + ":\t Move disk " + n + " from " + fromRod + " to " + toRod;
+      p.innerHTML = "- Move " + move + ":\t Move disk " + n + " from " + fromRod + " to " + toRod + ".";
       document.getElementById('Solution').appendChild(p);
     }
 
-    // Hanoi
+    // To print a new disk
+    function printDisk(n){
+      var div;
+      var varWidth = 0.2;
+
+      for(let i = 1; i<= n; i++) {
+        div = document.createElement('div');
+        div.innerHTML = i;
+        div.classList.add("disk");
+        div.id = "Disk" + i;
+        document.getElementById('Disk').appendChild(div);
+
+        // To increase width of div
+        varWidth += 0.4;
+        document.getElementById("Disk"+i).style.width = varWidth + "cm";
+      }
+    }
+    // classList: https://www.delftstack.com/it/howto/javascript/javascript-add-class/#:~:text=Se%20vuoi%20aggiungere%20una%20classe%20a%20un%20dato,per%20farlo%20%C3%A8%20ottenerlo%20usando%20il%20suo%20id.
+
+    // To solve Tower of Hanoi
     function towerOfHanoi(n, fromRod, toRod, usingRod) {
       if (n==1) {
         printMove(n, fromRod, toRod);
@@ -60,7 +86,6 @@
       move++;
       towerOfHanoi(n-1, usingRod, toRod, fromRod);
     }
-    // https://www.youtube.com/watch?v=bLHxrvDvL_8&t=1s
   </script>
 </body>
 </html>
