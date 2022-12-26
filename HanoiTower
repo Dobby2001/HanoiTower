@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Define the character set used: -->
+  <meta charset="UTF-8">
+  <!--  -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Setting the viewport to make your website look good on all devices: -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Define keywords for search engines: -->
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <!-- Define a description of your web page: -->
+  <meta name="description" content="Hanoi's Tower">
+  <!-- Define the author of a page: -->
+  <meta name="author" content="Luca Zepponi">
+  <!-- Favicon: -->
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <!--CSS
+  <link href="style.css" rel="stylesheet" type="text/css">-->
+  <title>Hanoi's Towers</title>
+</head>
+<body>
+  <header>
+    <h1 style="color: red;">Towers of Hanoi</h1>
+  </header>
+  <div>
+    <p>
+      Enter the number of disks: <input type="number" id="HanoiNumber" min="1" max="10" value="1">
+    </p>
+  </div>
+  <div>
+    <button type="button" onclick="hanoi()">Solution</button>
+    <p id="Solution">The solution is:</p>
+  </div>
+  
+  <script>
+    // Number of disk
+    function hanoi() {
+      let n = document.getElementById("HanoiNumber").value;
+      towerOfHanoi(n, 'A', 'C', 'B');
+    }
+
+    let move = 1;
+
+    function printMove(n, fromRod, toRod) {
+      var p = document.createElement('p');
+      p.innerHTML = "- Move " + move + ":\t Move disk " + n + " from " + fromRod + " to " + toRod;
+      document.getElementById('Solution').appendChild(p);
+    }
+
+    // Hanoi
+    function towerOfHanoi(n, fromRod, toRod, usingRod) {
+      if (n==1) {
+        printMove(n, fromRod, toRod);
+        move++;
+        return
+      }
+      towerOfHanoi(n-1, fromRod, usingRod, toRod);
+      printMove(n, fromRod, toRod);
+      move++;
+      towerOfHanoi(n-1, usingRod, toRod, fromRod);
+    }
+    // https://www.youtube.com/watch?v=bLHxrvDvL_8&t=1s
+  </script>
+</body>
+</html>
