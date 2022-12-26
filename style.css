@@ -1,0 +1,22 @@
+h1 {
+    color: red;
+}
+
+.blockDisk  {
+    display: flex;
+    justify-content: center;
+}
+
+.disk {
+    width: 0.6cm;
+    height: 0.6cm;
+
+    margin: 0 auto;
+
+    background-color: orange;
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
