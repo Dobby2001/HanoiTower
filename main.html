@@ -25,12 +25,28 @@
   </header>
   <div>
     <p>
-      Enter the number of disks: <input type="number" id="HanoiNumber" min="1" max="10" value="1">
+      Enter the number of disks: <input type="number" id="HanoiNumber" min="1" max="10" value="4">
     </p>
   </div>
 
-  <div class="blockDisk">
-    <div id="Disk"></div>
+  <button type="button" onclick="drawTowers()">Draw Towers</button>
+  <div class="towers-container">
+    <div class="towers">
+      <!-- height of Towers -->
+        <div class="heightDisks" id="heightDisks1">
+          <!-- Disks -->
+          <div id="Disk"></div>
+          <div class="height" id="Height1"></div>
+        </div>
+        <div class="heightDisks" id="heightDisks2">
+          <div class="height" id="Height2"></div>
+        </div>
+        <div class="heightDisks" id="heightDisks3">
+          <div class="height" id="Height3"></div>
+        </div>
+    </div>
+    <!-- Base of Towers -->
+    <div class="base" id="Base"></div>
   </div>
 
   <div>
@@ -38,54 +54,6 @@
     <p id="Solution">The solution is:</p>
   </div>
   
-  <script>
-    // To get number of disk
-    function hanoi() {
-      let n = document.getElementById("HanoiNumber").value;
-      towerOfHanoi(n, 'A', 'C', 'B');
-      printDisk(n);
-      return n;
-    }
-
-    let move = 1;
-    // To print the exact move
-    function printMove(n, fromRod, toRod) {
-      var p = document.createElement('p');
-      p.innerHTML = "- Move " + move + ":\t Move disk " + n + " from " + fromRod + " to " + toRod + ".";
-      document.getElementById('Solution').appendChild(p);
-    }
-
-    // To print a new disk
-    function printDisk(n){
-      var div;
-      var varWidth = 0.2;
-
-      for(let i = 1; i<= n; i++) {
-        div = document.createElement('div');
-        div.innerHTML = i;
-        div.classList.add("disk");
-        div.id = "Disk" + i;
-        document.getElementById('Disk').appendChild(div);
-
-        // To increase width of div
-        varWidth += 0.4;
-        document.getElementById("Disk"+i).style.width = varWidth + "cm";
-      }
-    }
-    // classList: https://www.delftstack.com/it/howto/javascript/javascript-add-class/#:~:text=Se%20vuoi%20aggiungere%20una%20classe%20a%20un%20dato,per%20farlo%20%C3%A8%20ottenerlo%20usando%20il%20suo%20id.
-
-    // To solve Tower of Hanoi
-    function towerOfHanoi(n, fromRod, toRod, usingRod) {
-      if (n==1) {
-        printMove(n, fromRod, toRod);
-        move++;
-        return
-      }
-      towerOfHanoi(n-1, fromRod, usingRod, toRod);
-      printMove(n, fromRod, toRod);
-      move++;
-      towerOfHanoi(n-1, usingRod, toRod, fromRod);
-    }
-  </script>
+  <script language="JavaScript" type="text/JavaScript" src="script.js"></script>
 </body>
 </html>
