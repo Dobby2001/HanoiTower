@@ -1,0 +1,75 @@
+// To solve Tower of Hanoi
+var move = 1;
+function hanoi(){
+  let n = document.getElementById("HanoiNumber").value;
+  let fromRod = 'A';
+  let toRod = 'C';
+  let usingRod = 'B';
+
+  towerOfHanoi(n, fromRod, toRod, usingRod);
+}
+
+function towerOfHanoi(n, fromRod, toRod, usingRod){
+  let widthRemove;
+
+  if (n==1) {
+    printMove(n, fromRod, toRod);
+    graphicSolution(n, toRod, widthRemove);
+  } else {
+    towerOfHanoi(n-1, fromRod, usingRod, toRod);
+    printMove(n, fromRod, toRod);
+    graphicSolution(n, toRod, widthRemove);
+    
+    towerOfHanoi(n-1, usingRod, toRod, fromRod);
+  }
+}
+
+function graphicSolution(n, toRod, widthRemove){
+  widthRemove = deleteHanoiDisk(n);
+  printDisks(n, toRod, widthRemove);
+}
+
+// To print the exact move
+function printMove(n, fromRod, toRod){
+  // Create element
+  var p = document.createElement('p');
+  // What to print
+  p.innerHTML = "- Move " + move + ":\t Move disk " + n + " from " + fromRod + " to " + toRod + ".";
+  // Print
+  document.getElementById('Solution').appendChild(p);
+  
+  console.log(p.innerHTML);
+
+  // Increase move
+  move++;
+}
+
+function deleteHanoiDisk(n){
+  // Remove child
+  var deleteChild = document.getElementById("Disk" + n);
+  var widthRemove = deleteChild.style.width.valueOf();
+  deleteChild.remove();
+
+  return widthRemove;
+}
+
+function printDisks(n, toRod, varWidth){
+  var div;
+  // Create a new div
+  div = document.createElement('div');
+  // Add class
+  div.classList.add("disk");
+  // Add id
+  div.id = "Disk" + n;
+
+  // Print the i-th number
+  const textNode = document.createTextNode(n);
+  div.appendChild(textNode);
+  
+  // Node before
+  const blockDisks = document.getElementById("Disk" + toRod);
+  blockDisks.insertBefore(div, blockDisks.children[0]);
+  
+  // To increase width of div
+  document.getElementById("Disk" + n).style.width = varWidth;
+}
